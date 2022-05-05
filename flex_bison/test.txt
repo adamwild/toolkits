@@ -1,0 +1,33 @@
+>> source: https://www.gimmesomeoven.com/baked-potato/
+>> time required: 1.5 hours
+>> course: dinner
+
+
+--test -- Don't burn the roux!
+
+Then"" add @salt and @ground black pepper{} to [-wtf ?-] [-wtf ?-] -taste.
+Poke holes in @potato{2}.
+
+
+Place @bacon strips{1%kg} on a baking sheet and glaze with @syrup{1/2%tbsp}.
+-- Don't burn the roux!
+
+Mash @potato{2%kg} until smooth -- alternatively, boil 'em first, then mash 'em, then stick 'em in a stew.
+Slowly add @milk{4%cup} [- TODO change units to litres -], keep mixing
+
+Place the potatoes into a #pot.
+Mash the potatoes with a #potato masher{}.
+
+
+Lay the potatoes on a #baking sheet{} and place into the #oven{}. Bake for ~{25%minutes}.
+
+Boil @eggs{2} for ~eggs{3%minutes}.
+
+plop[plop]
+plop[
+plop[[]]
+plop[-]
+plop--plop
+plop-plop-plop
+plop>plop
+plop>>plop
