@@ -124,6 +124,11 @@ def parse(text: str) -> list[dict]:
         elif t["type"] == "newline":
             if steps[-1] != []:
                 steps.append([])
+        elif t["type"] == "text":
+            if len(steps[-1]) and steps[-1][-1]["type"] == "text":
+                steps[-1][-1]["value"] += t["value"]
+            else:
+                steps[-1].append(t)
         elif t["type"] not in ["block comment", "line comment"]:
             steps[-1].append(t)
     if not steps[-1]:
