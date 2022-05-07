@@ -1,0 +1,17 @@
+
+[tool.poetry]
+name = "cooklang"
+version = "0.1.0"
+description = "Cooklang parser implementation following closely the EBNF of the language"
+authors = ["Net-Mist"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+PyYAML = "^6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
