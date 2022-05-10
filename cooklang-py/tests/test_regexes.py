@@ -1,7 +1,7 @@
 import re
 import unittest
 
-from cooklang import BLOCK_COMMENT, INLINE_COMMENT, MULTIWORD_INGREDIENT, ONE_WORD_INGREDIENT, WORD
+from cooklang.parser import BLOCK_COMMENT, INLINE_COMMENT, MULTIWORD_INGREDIENT, ONE_WORD_INGREDIENT, WORD
 
 
 class TestRegexes(unittest.TestCase):

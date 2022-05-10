@@ -22,5 +22,4 @@ class TestNumber(unittest.TestCase):
 
         for test_case in test_cases:
             output = cooklang.parse(test_case["input"])
-            print(output)
             self.assertEqual(output["steps"][0][0]["quantity"], test_case["output_ingredient_q"])
