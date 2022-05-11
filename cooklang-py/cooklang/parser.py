@@ -12,7 +12,7 @@ METADATA = r"(?:(?<=\n)|^)>>([^:\n]+):([^\n]+)\n"
 # text item = ? any character except new line character ? ;
 TEXT_ITEM = r"[^\n]"
 # word      = { text item - white space - punctuation character }- ;
-WORD = r"[^~@#{ \t\n\r]+"
+WORD = r"[^~@#{ \t\n\r\.,;]+"
 # units    = { text item - "}" }- ;
 UNITS = r"[^\n}]*"
 # quantity = { text item - "%" - "}" }- ;

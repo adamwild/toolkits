@@ -1,6 +1,9 @@
 """
 This module take care of the transformation of cooklang code to hugo-compatible markdown
 """
+import os
+from pathlib import Path
+
 from .parser import run_lexer
 
 MARKDOWN_TEMPLATE = """{md_code}
@@ -18,6 +21,36 @@ MARKDOWN_TEMPLATE = """{md_code}
 {md_steps}
 
 """
+
+
+def transform_all_recipes(cooklang_dir: Path, md_dir: Path) -> None:
+    """walk through the `cooklang_dir` filesystem.
+    - For every folder, create the corresponding one in `md_dir
+    - For every cooklang file, create the corresponding markdown file
+    """
+    md_dir.mkdir(parents=True, exist_ok=True)
+    for dirpath, dirnames, filenames in os.walk(cooklang_dir):
+        # create output_dirpath
+        print(f"{dirpath=}")
+        output_dirpath = md_dir / (dirpath.removeprefix(str(cooklang_dir)).removeprefix("/"))
+        dirpath = Path(dirpath)
+        print(f"{output_dirpath=}")
+
+        # For every folder, create the corresponding one in `md_dir
+        for dirname in dirnames:
+            (output_dirpath / dirname).mkdir(parents=True, exist_ok=True)
+
+        # For every cooklang file, create the corresponding markdown files
+        for filename in filenames:
+            if filename.endswith(".cook"):
+                output_filename = filename.removesuffix("cook") + "md"
+                with (dirpath / filename).open() as f:
+                    cooklang_content = f.read()
+                md_content = transform(cooklang_content)
+                print(output_dirpath)
+                print(output_filename)
+                with (output_dirpath / output_filename).open("w") as f:
+                    f.write(md_content)
 
 
 def transform(cooklang_code: str) -> str:
@@ -42,9 +75,8 @@ def transform(cooklang_code: str) -> str:
     # - title
     # - tags
     block_id = 0
-    while (block := cooklang_ast[block_id])["type"] in ["metadata", "newline"]:
-        if block["type"] == "metadata":
-            md_code += f"{block['key']}: {block['value']}\n"
+    while (block := cooklang_ast[block_id])["type"] == "metadata":
+        md_code += f"{block['key']}: {block['value']}\n"
         block_id += 1
     md_code += "---"
 
@@ -85,9 +117,10 @@ def process_steps(cooklang_ast: dict) -> tuple[list, list, list]:
     markdown_ingredients_list = ""
     markdown_cookwares_list = ""
     while block_id < len(cooklang_ast) and (block := cooklang_ast[block_id])["type"] != "metadata":
-        if block["type"] == "newline" and not newline:
-            markdown_steps += "\n"
-            newline = True
+        if block["type"] == "newline":
+            if not newline:
+                markdown_steps += "\n"
+                newline = True
             block_id += 1
             continue
         if newline:
