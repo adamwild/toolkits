@@ -127,8 +127,13 @@ def process_steps(cooklang_ast: dict) -> tuple[list, list, list]:
             newline = False
             markdown_steps += "* "
         if block["type"] == "ingredient":
-            markdown_steps += f"{{{{< ingredient \"{block['name']}\" \"{block['quantity']} {block['units']}\" >}}}}"
-            markdown_ingredients_list += f"* {block['name']} : {block['quantity']} {block['units']}\n"
+            quantity = block["quantity"]
+            if quantity == "some":
+                markdown_steps += f"{block['name']}"
+                markdown_ingredients_list += f"* {block['name']}\n"
+            else:
+                markdown_steps += f"{{{{< ingredient \"{block['name']}\" \"{block['quantity']} {block['units']}\" >}}}}"
+                markdown_ingredients_list += f"* {block['name']} : {block['quantity']} {block['units']}\n"
         if block["type"] == "cookware":
             markdown_steps += f"{block['name']}"
             markdown_cookwares_list += f"* {block['name']}\n"
