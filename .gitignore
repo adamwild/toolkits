@@ -3,3 +3,5 @@ out
 private
 __pycache__
 dist
+target
+.gdb_history

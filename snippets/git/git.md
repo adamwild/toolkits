@@ -6,3 +6,6 @@ lists branches that have been merged into the current branch.
 
 delete a branch
 `git branch -d ...`
+
+delete a remote branch
+`git push origin --delete plop`
