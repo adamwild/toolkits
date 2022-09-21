@@ -9,3 +9,6 @@ delete a branch
 
 delete a remote branch
 `git push origin --delete plop`
+
+edit all commit from main at once :
+`git reset --soft origin/main`
