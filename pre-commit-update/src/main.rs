@@ -99,8 +99,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut heap = BinaryHeap::new();
     for path in all_pre_commit_files.into_iter() {
         let content = fs::read_to_string(&path)?;
-        let content: PreCommitConfig = serde_yaml::from_str(&content)?;
-        heap.push(PreCommitFile { content, path })
+        match  serde_yaml::from_str(&content) {
+            Ok(v) => heap.push(PreCommitFile { content: v, path }),
+            Err(e) => println!("can't parse {}: {}", &path, e),
+        };
     }
 
     let mut updated_hooks = HashMap::new();
