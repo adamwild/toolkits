@@ -8,7 +8,7 @@ repos:
   -   id: end-of-file-fixer
   -   id: check-added-large-files
 - repo: https://github.com/hadolint/hadolint
-  rev: v2.10.0
+  rev: v2.12.1-beta
   hooks:
     - id: hadolint
       types: [file]
@@ -17,7 +17,7 @@ repos:
       # we ignore error DL3008: Pin versions in apt-get install. This is debatable but for sensitive stuff like chrome,
       # it's better to be sure we use the last available version, Even if this means that the build is not reproducible.
 - repo: https://github.com/asottile/pyupgrade
-  rev: v2.37.3
+  rev: v3.2.2
   hooks:
     - id: pyupgrade
       args: ["--py310-plus"]
@@ -33,7 +33,7 @@ repos:
       # In this case, packages need to be added here
       # - --known-local-folder=
 - repo: https://github.com/psf/black
-  rev: 22.8.0
+  rev: 22.10.0
   hooks:
     - id: black
       args:
