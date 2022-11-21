@@ -29,7 +29,7 @@ class Netcat:
     ```
     """
 
-    def __init__(self, ip: str, port: int):
+    def __init__(self, ip: str, port: int) -> None:
         self.buff = ""
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((ip, port))
@@ -37,7 +37,7 @@ class Netcat:
 
         self.memory = ""
 
-    def read(self, length=4096):
+    def read(self, length=4096) -> str:
         """Read `length` bytes off the socket"""
         ready = select.select([self.socket], [], [], 0.1)
         if ready[0]:
@@ -46,9 +46,9 @@ class Netcat:
             return message
         return ""
 
-    def read_until(self, data):
+    def read_until(self, data) -> str:
         """Read data into the buffer until we have data"""
-        while not data in self.buff:
+        while data not in self.buff:
             self.buff += self.socket.recv(1024)
 
         pos = self.buff.find(data)
@@ -57,12 +57,12 @@ class Netcat:
 
         return rval
 
-    def write(self, data):
+    def write(self, data) -> None:
         self.socket.send(data)
 
-    def write_str(self, data: str):
+    def write_str(self, data: str) -> None:
         self.memory += data + "\n"
         self.socket.send((data + "\n").encode())
 
-    def close(self):
+    def close(self) -> None:
         self.socket.close()

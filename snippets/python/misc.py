@@ -155,7 +155,7 @@ q_out.stop()
 
 # %%
 # algo
-def smart_insert(list, item):
+def smart_insert(list, item) -> list:
     """list is a list of element with (score, something) that need to be order by score"""
     min = 0
     max = len(list)

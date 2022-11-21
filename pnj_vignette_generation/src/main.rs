@@ -85,28 +85,28 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{:#?}", &conf_file);
     println!("load conf: {:?}", t.elapsed());
 
-    
+
     let t = time::Instant::now();
     let full_image_h = 29.7;
     let full_image_w = 21.;
-    
+
     let n_col = conf_file.n_col;
     let n_pnj = conf_file.pnj.len();
     let n_lignes = (n_pnj as f64 / n_col as f64).ceil();
 
     let small_image_h = full_image_h / (2. * n_lignes);
     let small_image_w = full_image_w / (n_col as f64);
-    
+
     let w_pixel: u32 = 250;
     let h_pixel = (w_pixel as f64 * small_image_h / small_image_w).ceil() as u32;
-    
+
     let full_image_h = ((h_pixel as f64) * 2. * n_lignes) as i32;
     let full_image_w = w_pixel * (n_col as u32);
-    
+
     let font_data: &[u8] = include_bytes!("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf");
     let font: Font<'static> = Font::try_from_bytes(font_data).unwrap();
     println!("init all vars: {:?}", t.elapsed());
-    
+
     // create white image
     let t = time::Instant::now();
     let mut img = RgbImage::from_pixel(
@@ -134,7 +134,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         })
         .collect();
     println!("load and process images: {:?}", t.elapsed());
-    
+
     let t = time::Instant::now();
     for (i, (pnj_name, pnj_picture)) in pnj_images.into_iter().enumerate() {
         // update global image
