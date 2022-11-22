@@ -1,4 +1,5 @@
 test:
 	cargo fmt
-	cargo clippy --fix
-	cargo check
+	cargo fix --allow-dirty
+	cargo clippy --fix --allow-dirty
+	cargo check 
