@@ -8,8 +8,11 @@ use std::error::Error;
 use std::fs;
 use std::path::Path;
 use std::process::Command;
+use eyre::Result;
+use std::env;
 
-static WORKSPACE_ROOT: &str = "/home/seb/workspace";
+
+static WORKSPACE_ROOT: &str = "/home/siooss/workspace";
 static PRE_COMMIT_FILE: &str = ".pre-commit-config.yaml";
 static GIT_DIR: &str = ".git";
 
@@ -52,7 +55,7 @@ impl PartialOrd for PreCommitFile {
 /// - if a file `.pre-commit-config.yaml` is present, stop the exploration
 /// - if a file .git is present, don't go in sub-directory
 /// - else continue the exploration to all sub-folder
-fn find_pre_commit_config() -> Result<Vec<String>, Box<dyn Error>> {
+fn find_pre_commit_config() -> Result<Vec<String>> {
     let mut folders_to_explore: Vec<String> = vec![WORKSPACE_ROOT.to_string()];
     let mut all_pre_commit_files = Vec::new();
     while let Some(f) = folders_to_explore.pop() {
@@ -94,6 +97,7 @@ fn run_pre_commit_autoupdate(path: &Path) {
 
 fn main() -> Result<(), Box<dyn Error>> {
     let all_pre_commit_files = find_pre_commit_config()?;
+    println!("found {} pre-commit files", all_pre_commit_files.len());
 
     // find all repo use in all pre_commit files
     let mut heap = BinaryHeap::new();

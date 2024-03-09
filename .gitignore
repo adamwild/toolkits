@@ -6,3 +6,4 @@ dist
 target
 .gdb_history
 *.onnx
+*.png
