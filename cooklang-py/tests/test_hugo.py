@@ -51,4 +51,4 @@ assiette.
 class TestHugo(unittest.TestCase):
     def test_cake(self) -> None:
         out = transform(croque)
-        print(out)
+        # print(out)
